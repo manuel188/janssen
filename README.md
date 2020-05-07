@@ -1,2 +1,0 @@
-# janssen
-GameJam Project
