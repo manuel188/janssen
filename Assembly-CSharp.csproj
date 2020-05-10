@@ -63,9 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Player scripts\CharacterController2D.cs" />
-    <Compile Include="Assets\Scripts\Player scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Player scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody2D playerRigidBody;
     private bool isFacingRight = true;
+    private bool isRunningUp = true;
 
     /*
         =========  TODO  =========
@@ -34,12 +35,14 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        playerAnimator.SetFloat("Moving", 0);
+        playerAnimator.SetFloat("Horizontal", 0);
         float moveHorizontal = Input.GetAxis("Horizontal");
-        playerAnimator.SetFloat("Moving", Mathf.Abs(moveHorizontal));
+        playerAnimator.SetFloat("Vertical", Mathf.Abs(moveHorizontal));
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         playerRigidBody.MovePosition(playerRigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+        //Horizontal animations
         if(moveHorizontal > 0 && !isFacingRight)
         {
             Flip();
@@ -51,15 +54,36 @@ public class Player : MonoBehaviour
         }
         else
         {
-            playerAnimator.SetFloat("Moving", Mathf.Abs(moveHorizontal));
+            playerAnimator.SetFloat("Horizontal", Mathf.Abs(moveHorizontal));
 
         }
 
+        //Vertical animations
+        if (moveVertical > 0 && !isRunningUp)
+        {
+            Rotation();
+        }
+
+        else if (moveVertical < 0 && isRunningUp)
+        {
+            Rotation();
+        }
+        else
+        {
+            playerAnimator.SetFloat("Vertical", Mathf.Abs(moveVertical));
+
+        }
     }
 
     private void Flip()
     {
         isFacingRight = !isFacingRight;
         playerSpriteRenderer.flipX = !playerSpriteRenderer.flipX;
+    }
+
+    private void Rotation()
+    {
+        isRunningUp = !isRunningUp;
+        playerSpriteRenderer.transform.eulerAngles = Vector3.forward * 40;
     }
 }
